@@ -2,50 +2,15 @@ import React, { Component } from 'react';
 import { View } from 'native-base';
 import { MapView, Location, Permissions } from 'expo';
 import { connect } from 'react-redux';
+import * as actions from '../actions';
 
 class HomeScreen extends Component {
-  state = {
-    region: {
-      latitude: 36.174465,
-      longitude: -86.767960,
-      latitudeDelta: 0.0922,
-      longitudeDelta: 0.0421,
-    }
-  }
-
-  _getLocation = async () => {
-    let { status } = await Permissions.askAsync(Permissions.LOCATION);
-    if (!status === 'granted') {
-      console.error('You must grant location permissions.');
-    } else {
-      let position = await Location.getCurrentPositionAsync({
-        enableHighAccuracy: true
-      });
-      this.setState({
-        region: {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421
-        }
-      });
-    }
-  }
-
-  _onRegionChange = (region) => {
-    // console.log('Region changed', region);
-  }
-
-  _onRegionChangeComplete = (region) => {
-    // console.log('Region change completed', region);
-  }
-
-  async componentDidMount() {
-    this._getLocation();
+  componentDidMount() {
+    this.props.getCurrentLocation();
   }
 
   render() {
-    const { region } = this.state;
+    const { region } = this.props;
 
     return (
       <View style={{ flex: 1 }}>
@@ -53,8 +18,6 @@ class HomeScreen extends Component {
           provider={MapView.PROVIDER_GOOGLE}
           style={{ flex: 1 }}
           region={region}
-          onRegionChange={this._onRegionChange}
-          onRegionChangeComplete={this._onRegionChangeComplete}
         >
           <MapView.Marker
             coordinate={region}
@@ -66,8 +29,8 @@ class HomeScreen extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return state;
+const mapStateToProps = ({ location }) => {
+  return { region: location };
 };
 
-export default connect(mapStateToProps)(HomeScreen);
+export default connect(mapStateToProps, actions)(HomeScreen);
