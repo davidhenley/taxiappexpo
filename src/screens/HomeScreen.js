@@ -46,6 +46,8 @@ class HomeScreen extends Component {
 const styles = {
   headerStyle: {
     paddingTop: 0,
+    paddingLeft: 5,
+    paddingRight: 5,
     height: 40
   }
 }
