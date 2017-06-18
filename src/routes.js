@@ -7,9 +7,15 @@ class RouterComponent extends Component {
   render() {
     return (
       <Router>
-        <Scene key="home" title="Home" component={HomeScreen} />
+        <Scene key="home" title="Home" component={HomeScreen} style={styles.scene} />
       </Router>
     );
+  }
+}
+
+const styles = {
+  scene: {
+    paddingTop: 64
   }
 }
 

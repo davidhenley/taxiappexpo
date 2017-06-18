@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'native-base';
+import { View, Header, Icon, Item, Input } from 'native-base';
 import { MapView, Location, Permissions } from 'expo';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
@@ -14,18 +14,39 @@ class HomeScreen extends Component {
 
     return (
       <View style={{ flex: 1 }}>
-        <MapView
-          provider={MapView.PROVIDER_GOOGLE}
-          style={{ flex: 1 }}
-          region={region}
-        >
-          <MapView.Marker
-            coordinate={region}
-            pinColor="green"
-          />
-        </MapView>
+        <Header searchBar rounded style={styles.headerStyle}>
+          <Item>
+            <Icon name="ios-search" />
+            <Input placeholder="Pick Up" />
+          </Item>
+        </Header>
+        <Header searchBar rounded style={styles.headerStyle}>
+          <Item>
+            <Icon name="ios-search" />
+            <Input placeholder="Drop Off" />
+          </Item>
+        </Header>
+        {this.props.region.latitude && (
+          <MapView
+            provider={MapView.PROVIDER_GOOGLE}
+            style={{ flex: 1 }}
+            region={region}
+          >
+            <MapView.Marker
+              coordinate={region}
+              pinColor="green"
+            />
+          </MapView>
+        )}
       </View>
     );
+  }
+}
+
+const styles = {
+  headerStyle: {
+    paddingTop: 0,
+    height: 40
   }
 }
 

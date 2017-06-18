@@ -1,12 +1,18 @@
 import {
   GET_CURRENT_LOCATION
 } from '../actions/types';
+import { Dimensions } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
+const ASPECT_RATIO = width / height;
+const LATITUDE_DELTA = 0.0922;
+const LONGITUDE_DELTA = ASPECT_RATIO * LATITUDE_DELTA;
 
 const INITIAL_STATE = {
-  latitude: 36.174465,
-  longitude: -86.767960,
-  latitudeDelta: 0.0922,
-  longitudeDelta: 0.0421,
+  latitude: null,
+  longitude: null,
+  latitudeDelta: LATITUDE_DELTA,
+  longitudeDelta: LONGITUDE_DELTA ,
 }
 
 export default (state = INITIAL_STATE, action) => {
