@@ -1,0 +1,20 @@
+{
+  "name": "taxiapp",
+  "version": "0.0.0",
+  "description": "Hello Expo!",
+  "author": null,
+  "private": true,
+  "main": "main.js",
+  "dependencies": {
+    "expo": "17.0.0",
+    "react": "16.0.0-alpha.6",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-17.0.0.tar.gz",
+    "react-native-router-flux": "^3.40.1",
+    "react-redux": "^5.0.5",
+    "redux": "^3.7.0",
+    "redux-thunk": "^2.2.0"
+  },
+  "devDependencies": {
+    "redux-logger": "^3.0.6"
+  }
+}
