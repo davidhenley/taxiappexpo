@@ -1,12 +1,33 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text } from 'native-base';
+import { MapView } from 'expo';
 import { connect } from 'react-redux';
 
 class HomeScreen extends Component {
+  state = {
+    region: {
+      latitude: 37.78825,
+      longitude: -122.4324,
+      latitudeDelta: 0.0922,
+      longitudeDelta: 0.0421,
+    }
+  }
+
   render() {
+    const { region } = this.state;
+
     return (
       <View style={styles.container}>
-        <Text>Home Screen</Text>
+        <MapView
+          provider={MapView.PROVIDER_GOOGLE}
+          style={{ flex: 1 }}
+          region={region}
+        >
+          <MapView.Marker
+            coordinate={region}
+            pinColor="green"
+          />
+        </MapView>
       </View>
     );
   }
@@ -14,9 +35,7 @@ class HomeScreen extends Component {
 
 const styles = {
   container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
+    flex: 1
   }
 };
 

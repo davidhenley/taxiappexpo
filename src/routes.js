@@ -7,7 +7,7 @@ class RouterComponent extends Component {
   render() {
     return (
       <Router>
-        <Scene key="home" hideNavBar={true} component={HomeScreen} />
+        <Scene key="home" title="Home" component={HomeScreen} />
       </Router>
     );
   }
