@@ -9,6 +9,11 @@ class HomeScreen extends Component {
     this.props.getCurrentLocation();
   }
 
+  _onChangeText = (text) => {
+    const { latitude, longitude } = this.props.region;
+    this.props.searchPlaces({ latitude, longitude }, text);
+  }
+
   render() {
     const { region } = this.props;
 
@@ -17,13 +22,13 @@ class HomeScreen extends Component {
         <Header searchBar rounded style={styles.headerStyle}>
           <Item>
             <Icon name="ios-search" />
-            <Input placeholder="Pick Up" />
+            <Input placeholder="Pick Up" name="Pickup" onChangeText={this._onChangeText} />
           </Item>
         </Header>
         <Header searchBar rounded style={styles.headerStyle}>
           <Item>
             <Icon name="ios-search" />
-            <Input placeholder="Drop Off" />
+            <Input placeholder="Drop Off" name="Dropoff" onChangeText={this._onChangeText} />
           </Item>
         </Header>
         {this.props.region.latitude && (
